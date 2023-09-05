@@ -1,20 +1,37 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
+ <%- include('includes/head') %>
+ <%- include('includes/nav') %>
+   <div class="container">
+    <div class="row">
+      <div class="col-lg-2"></div>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Modelo</title>
-</head>
+      <div class="col-lg-8 my-3">
+        <h1 class="text-center">Agenda</h1>
+        <p class="text-center lead">Seus dados estão abaixo</p>
 
-<body>
+        <%- include('includes/messages'); %>
 
-  <section class="container">
-    <h1>Lorem ipsum dolor sit amet</h1>
-  </section>
+        <% if(contatos.length > 0) { %>
+        <div class="responsive-table">
+          <table class="table my-3">
+           <% contatos.forEach(contato => { %>
+            <tr>
+              <td><%= contato.name %></td>
+              <td><%= contato.sobrenome %></td>
+              <td><%= contato.telefone %></td>
+              <td><%= contato.email %></td>
+              <td><a href="/contato/index/<%= contato._id %>">Editar</a></td>
+              <td><a class="text-danger" href="/contato/delete/<%= contato._id %>">Excluir</a></td>
+            </tr>
+           <% }); %>
+          </table>
+        </div>
+        <% } else { %>
+          <p class="text-center lead">Não existem contatos na sua agenda</p>
+        <% } %>
+        
+      </div>
 
-  <script src="./assets/js/bundle.js"></script>
-</body>
-
-</html>
+      <div class="col-lg-2"></div>
+    </div>
+   </div>
+ <%- include('includes/footer') %>
